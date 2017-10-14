@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="OpenFLMark" package="com.innogames.openflmark" version="1.0.0" company="InnoGames" />
+	<app main="Main" path="Export" file="OpenFLMark" />
+	
+	<window width="800" height="600" orientation="portrait" background="0xDDDDDD" />
+	<window resizable="false" unless="mobile" />
+
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="starling" />
+	
+	<assets path="Assets" rename="assets" />
+	<assets path="assets/textures" />
+
+	
+</project>
