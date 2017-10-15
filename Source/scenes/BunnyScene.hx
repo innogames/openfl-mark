@@ -29,7 +29,6 @@ class Bunny extends Tile {
 class BunnyScene extends Sprite implements Benchmarkable {
 	
 	
-	private var addingBunnies:Bool;
 	private var bunnies:Array<Bunny>;
 	private var gravity:Float;
 	private var minX:Int;
@@ -126,16 +125,6 @@ class BunnyScene extends Sprite implements Benchmarkable {
 				
 				bunny.speedY = 0;
 				bunny.y = minY;
-				
-			}
-			
-		}
-		
-		if (addingBunnies) {
-			
-			for (i in 0...100) {
-				
-				addBunny ();
 				
 			}
 			
