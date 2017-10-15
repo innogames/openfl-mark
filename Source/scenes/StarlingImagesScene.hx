@@ -19,7 +19,7 @@ import openfl.Assets;
 import starling.textures.Texture;
 
 
-@:keep class StarlingImagesScene extends Sprite implements Benchmarkable {
+@:keep class StarlingImagesScene extends Sprite implements BenchmarkableStarling {
 	private static inline var FRAME_TIME_WINDOW_SIZE:Int = 10;
 
 	private var _resultText:TextField;

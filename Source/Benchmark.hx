@@ -79,7 +79,7 @@ class Benchmark extends Sprite {
 			//_starling.skipUnchangedFrames = true;
 			//_starling.simulateMultitouch = true;
 			_starling.addEventListener(starling.events.Event.ROOT_CREATED, function() {
-				cast(_starling.root, scenes.StarlingImagesScene).start();
+				cast(_starling.root, scenes.BenchmarkableStarling).start();
 				startScene(cast(_starling.root, Benchmarkable));
 			});
 			
