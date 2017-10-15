@@ -7,8 +7,17 @@ import starling.display.Image;
 import starling.display.Sprite;
 import starling.events.EnterFrameEvent;
 import starling.events.Event;
+import starling.events.KeyboardEvent;
 import starling.text.TextField;
 import starling.textures.Texture;
+import starling.textures.TextureAtlas;
+import starling.utils.AssetManager;
+import openfl.ui.Keyboard;
+import openfl.system.Capabilities;
+import openfl.Assets;
+
+import starling.textures.Texture;
+
 
 @:keep class StarlingImagesScene extends Sprite implements Benchmarkable {
 	private static inline var FRAME_TIME_WINDOW_SIZE:Int = 10;
@@ -25,6 +34,9 @@ import starling.textures.Texture;
 
 	public function new(stage: Stage) {
 		super();
+	}
+
+	public function start() {
 
 		// the container will hold all test objects
 		_container = new Sprite();
@@ -34,11 +46,16 @@ import starling.textures.Texture;
 									  // thus, it is more efficient to disable them.
 		addChildAt(_container, 0);
 
+		var assets = loadAssets();
+
 		_frameTimes = new Array<Float>();
 		_objectPool = [];
-		_objectTexture = Game.assets.getTexture("benchmark_object");
+		_objectTexture = assets.getTexture("benchmark_object");
 
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
+
+		//addEventListener(Event.TRIGGERED, onButtonTriggered);
+        addEventListener(KeyboardEvent.KEY_DOWN, onKey);
 
 		onStartButtonTriggered();
 	}
@@ -122,4 +139,25 @@ import starling.textures.Texture;
 	private function putObjectToPool(object:DisplayObject) {
 		_objectPool[_objectPool.length] = object;
 	}
+
+
+    private function loadAssets():AssetManager {
+        var assets:AssetManager = new AssetManager();
+
+        assets.verbose = Capabilities.isDebugger;
+
+        var atlasTexture:Texture = Texture.fromBitmapData(Assets.getBitmapData("assets/textures/1x/atlas.png"), false);
+        var atlasXml:Xml = Xml.parse(Assets.getText("assets/textures/1x/atlas.xml")).firstElement();
+        assets.addTexture("atlas", atlasTexture);
+        assets.addTextureAtlas("atlas", new TextureAtlas(atlasTexture, atlasXml));
+
+        return assets;
+    }
+
+    private function onKey(event:KeyboardEvent) {
+        if (event.keyCode == Keyboard.SPACE)
+            Starling.current.showStats = !Starling.current.showStats;
+        else if (event.keyCode == Keyboard.X)
+            Starling.current.context.dispose();
+    }
 }

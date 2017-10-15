@@ -42,29 +42,6 @@ class Benchmark extends Sprite {
 
 		this._main = main;
 
-		// We develop the game in a *fixed* coordinate system of 320x480. The game might
-		// then run on a device with a different resolution; for that case, we zoom the
-		// viewPort to the optimal size for any display and load the optimal textures.
-
-		Starling.multitouchEnabled = true; // for Multitouch Scene
-
-		_starling = new Starling(Game, main.stage, null, null, Context3DRenderMode.AUTO, "auto");
-		_starling.stage.stageWidth = Constants.GameWidth;
-		_starling.stage.stageHeight = Constants.GameHeight;
-		_starling.enableErrorChecking = Capabilities.isDebugger;
-		//_starling.skipUnchangedFrames = true;
-		_starling.simulateMultitouch = true;
-		_starling.addEventListener(starling.events.Event.ROOT_CREATED, function() {
-			cast(_starling.root, Game).start();
-		});
-		
-		//main.stage.addEventListener(Event.RESIZE, onResize, false, Max.INT_MAX_VALUE, true);
-
-		_starling.start();
-
-		// the main menu listens for TRIGGERED events, so we just need to add the button.
-		// (the event will bubble up when it's dispatched.)
-
 		_controller = new Controller(this);
 		addChild(_controller);
 	}
@@ -93,14 +70,33 @@ class Benchmark extends Sprite {
 		var sceneClass:Class<Dynamic> = Type.resolveClass(name);
 		var scene = Type.createInstance(sceneClass, [stage]);
 		if (Std.is(scene, StarlingSprite)) {
-			var starling = cast(scene, StarlingSprite);
-			cast(_starling.root, Game).addChild(starling);
+
+
+			_starling = new Starling(sceneClass, _main.stage, null, null, Context3DRenderMode.AUTO, "auto");
+			_starling.stage.stageWidth = Constants.GameWidth;
+			_starling.stage.stageHeight = Constants.GameHeight;
+			_starling.enableErrorChecking = Capabilities.isDebugger;
+			//_starling.skipUnchangedFrames = true;
+			//_starling.simulateMultitouch = true;
+			_starling.addEventListener(starling.events.Event.ROOT_CREATED, function() {
+				cast(_starling.root, scenes.StarlingImagesScene).start();
+				startScene(cast(_starling.root, Benchmarkable));
+			});
+			
+			//main.stage.addEventListener(Event.RESIZE, onResize, false, Max.INT_MAX_VALUE, true);
+
+			_starling.start();
 		}
 		else {
 			var openfl = cast(scene, OpenFLSprite);
 			openfl.y = 30;
 			addChild(openfl);
+
+			startScene(cast(scene, Benchmarkable));
 		}
+	}
+
+	private function startScene(scene: Benchmarkable) {
 		_currentScene = cast(scene, Benchmarkable);
 
 		_controller.setTestObjectCount(_currentScene.getTestObjectCount());
