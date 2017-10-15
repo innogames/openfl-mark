@@ -128,7 +128,7 @@ class Benchmark extends Sprite {
 
 	private function onTuningComplete() {
 		var fps = _controller.getFPS();
-		if (fps > 50) {
+		if (fps > 25) {
 			// Double test objects to reduce fps
 			_currentScene.addTestObjects(_currentScene.getTestObjectCount());
 			
