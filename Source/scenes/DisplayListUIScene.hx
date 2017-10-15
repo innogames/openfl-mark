@@ -2,6 +2,8 @@ package scenes;
 
 import openfl.display.Stage;
 import openfl.display.Sprite;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.text.TextField;
 
@@ -30,12 +32,16 @@ class BigSprite extends Sprite {
 class DisplayListUIScene extends Sprite implements Benchmarkable {
 	
 	private var bigSprites:Array<Sprite>;
+	private var _wabbitData:BitmapData;
 
-	static inline var OBJECTS_PER_BIG_SPRITE = 31;
+	static inline var WABBITS = 5;
+	static inline var OBJECTS_PER_BIG_SPRITE = 1+10*(4+WABBITS);
 	
 	public function new (stage: Stage) {
 		
 		super ();
+
+		_wabbitData = Assets.getBitmapData ("assets/wabbit_alpha.png");
 		
 		addTestObjects(1000);
 
@@ -62,28 +68,46 @@ class DisplayListUIScene extends Sprite implements Benchmarkable {
 		//bigSprite.height = 60;
 		
 		for (i in 0...count) {
-			var smallSprite = createSmallSprite(10);
-			smallSprite.x = Std.random(100);
-			smallSprite.y = Std.random(50);
-			bigSprite.addChild(smallSprite);
+			var mediumSprite = createMediumSprite();
+			mediumSprite.x = Std.random(100);
+			mediumSprite.y = Std.random(50);
+			bigSprite.addChild(mediumSprite);
 		}
 
 		return bigSprite;
 	}
 
-	private function createSmallSprite(count:Int):Sprite {
-		var smallSprite = new Sprite();
-		//smallSprite.width = 50;
-		//smallSprite.height = 30;
+	private function createMediumSprite():Sprite {
+		var mediumSprite = new Sprite();
+		//mediumSprite.width = 50;
+		//mediumSprite.height = 30;
 
 		var shape = new Shape();
 		shape.graphics.beginFill(0x800000);
 		shape.graphics.drawRect(0, 0, 40, 40);
 		shape.graphics.endFill();
-		smallSprite.addChild(shape);
+		mediumSprite.addChild(shape);
 
 		var text = new utils.Text(50, 10, "Hello");
-		smallSprite.addChild(text);
+		mediumSprite.addChild(text);
+
+		var smallSprite = createSmallSprite();
+		smallSprite.y = 20;
+		mediumSprite.addChild(smallSprite);
+
+		return mediumSprite;
+	}
+
+	private function createSmallSprite():Sprite {
+		var smallSprite = new Sprite();
+		//smallSprite.width = 50;
+		//smallSprite.height = 30;
+
+		for(i in 0...WABBITS) {
+			var bitmap = new Bitmap(_wabbitData);
+			bitmap.x = i*7;
+			smallSprite.addChild(bitmap);
+		}
 
 		return smallSprite;
 	}

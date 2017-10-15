@@ -4,6 +4,8 @@ import openfl.display.Stage;
 
 import starling.display.Sprite;
 import starling.display.Quad;
+import starling.display.Image;
+import starling.textures.Texture;
 import starling.text.TextField;
 
 
@@ -33,8 +35,10 @@ class BigStarlingSprite extends Sprite {
 class StarlingUIScene extends Sprite implements BenchmarkableStarling {
 	
 	private var bigSprites:Array<Sprite>;
+	private var _wabbitData:Texture;
 
-	static inline var OBJECTS_PER_BIG_SPRITE = 31;
+	static inline var WABBITS = 5;
+	static inline var OBJECTS_PER_BIG_SPRITE = 1+10*(4+WABBITS);
 	
 	public function new (stage: Stage) {
 		
@@ -43,6 +47,8 @@ class StarlingUIScene extends Sprite implements BenchmarkableStarling {
 	}
 
 	public function start() {
+		_wabbitData = Texture.fromBitmapData(Assets.getBitmapData ("assets/wabbit_alpha.png"));
+
 		addTestObjects(1000);
 	}
 
@@ -67,25 +73,43 @@ class StarlingUIScene extends Sprite implements BenchmarkableStarling {
 		//bigSprite.height = 60;
 		
 		for (i in 0...count) {
-			var smallSprite = createSmallSprite(10);
-			smallSprite.x = Std.random(100);
-			smallSprite.y = Std.random(50);
-			bigSprite.addChild(smallSprite);
+			var mediumSprite = createMediumSprite();
+			mediumSprite.x = Std.random(100);
+			mediumSprite.y = Std.random(50);
+			bigSprite.addChild(mediumSprite);
 		}
 
 		return bigSprite;
 	}
 
-	private function createSmallSprite(count:Int):Sprite {
+	private function createMediumSprite():Sprite {
+		var mediumSprite = new Sprite();
+		//mediumSprite.width = 50;
+		//mediumSprite.height = 30;
+
+		var shape = new Quad(40, 40, 0x800000);
+		mediumSprite.addChild(shape);
+
+        var text = new TextField(50, 10, "Hello");
+		mediumSprite.addChild(text);
+
+		var smallSprite = createSmallSprite();
+		smallSprite.y = 20;
+		mediumSprite.addChild(smallSprite);
+
+		return mediumSprite;
+	}
+
+	private function createSmallSprite():Sprite {
 		var smallSprite = new Sprite();
 		//smallSprite.width = 50;
 		//smallSprite.height = 30;
 
-		var shape = new Quad(40, 40, 0x800000);
-		smallSprite.addChild(shape);
-
-        var text = new TextField(50, 10, "Hello");
-		smallSprite.addChild(text);
+		for(i in 0...WABBITS) {
+			var bitmap = new Image(_wabbitData);
+			bitmap.x = i*7;
+			smallSprite.addChild(bitmap);
+		}
 
 		return smallSprite;
 	}
