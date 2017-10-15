@@ -7,6 +7,9 @@ import utils.Text;
 import openfl.events.MouseEvent;
 
 
+/**
+	The results screen show the results of one or multiple benchmarks
+**/
 class ResultsScreen extends Sprite {
 	public function new(main:Main, results:Array<Result>) {
 		super();

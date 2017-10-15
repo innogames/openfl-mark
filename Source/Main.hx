@@ -12,7 +12,7 @@ import openfl.events.Event;
 
 
 class Main extends Sprite {
-    private var _mainMenu:MenuScreen;
+    private var _menuScreen:MenuScreen;
     private var _benchmark:Benchmark;
     private var _background:Bitmap;
     private var _resultsScreen:ResultsScreen;
@@ -79,15 +79,15 @@ class Main extends Sprite {
         // now would be a good time for a clean-up
         System.gc();
         
-        if (_mainMenu == null)
-            _mainMenu = new MenuScreen(this);
+        if (_menuScreen == null)
+            _menuScreen = new MenuScreen(this);
         
-        addChild(_mainMenu);
+        addChild(_menuScreen);
     }
 
     private function hideMainMenu() {
-        removeChild(_mainMenu);
-        _mainMenu = null;
+        removeChild(_menuScreen);
+        _menuScreen = null;
     }
 
     private function showBenchmark() {

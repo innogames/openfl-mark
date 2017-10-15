@@ -13,6 +13,9 @@ import utils.Text;
 import openfl.events.MouseEvent;
 
 
+/**
+	The Menu screen displays the main menu.
+**/
 class MenuScreen extends Sprite {
 	public function new(main:Main) {
 		super();

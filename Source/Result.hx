@@ -1,5 +1,8 @@
 package;
 
+/**
+	This class represents one benchmark result
+**/
 class Result {
 	public var name:String;
 	public var fps:Float;

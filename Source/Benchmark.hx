@@ -24,6 +24,9 @@ enum BenchmarkState {
 	Benchmarking;
 }
 
+/**
+	Runs one benchmark
+**/
 class Benchmark extends Sprite {
 	private var _currentScene:Benchmarkable;
 	private var _controller:Controller;

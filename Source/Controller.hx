@@ -7,6 +7,9 @@ import utils.Button;
 import utils.Text;
 import utils.FPS;
 
+/**
+ * The Controller is displayed above the benchmark area
+ */
 class Controller extends Sprite {
     private var _backButton:Button;
     private var _fps:FPS;
