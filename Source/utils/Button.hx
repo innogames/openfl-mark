@@ -23,7 +23,7 @@ class Button extends SimpleButton {
 		textField.height = height;
 		textField.text = text;
 		textField.defaultTextFormat = format;
-		//textField.mouseEnabled = false;
+		textField.selectable = false;
 
 		var rectangleShape:Shape = new Shape();
 		rectangleShape.graphics.beginFill(0xCCCCCC);
