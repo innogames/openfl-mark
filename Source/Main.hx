@@ -12,100 +12,86 @@ import openfl.events.Event;
 
 
 class Main extends Sprite {
-    private var _menuScreen:MenuScreen;
-    private var _benchmark:Benchmark;
-    private var _background:Bitmap;
-    private var _resultsScreen:ResultsScreen;
+	private var _menuScreen:MenuScreen;
+	private var _benchmark:Benchmark;
+	private var _background:Bitmap;
+	private var _resultsScreen:ResultsScreen;
 
-    public function new() {
-        super();
-        if (stage != null) start();
-        else addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-    }
+	public function new() {
+		super();
+		if (stage != null) start();
+		else addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+	}
 
-    private function onAddedToStage(event:Dynamic) {
-        removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+	private function onAddedToStage(event:Dynamic) {
+		removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		
-        start();
-    }
+		start();
+	}
 
-    private function start() {
+	private function start() {
 
-        initElements();
+		showMainMenu();
+	}
 
-        _benchmark = new Benchmark(this);
-        showMainMenu();
-    }
+	public function onButtonTriggered(event:Event) {
+		var button:Button = cast(event.target, Button);
+		
+		hideMainMenu();
 
+		showBenchmark();
+		_benchmark.showScene(button.name);
+	}
 
+	public function onBenchmarkStop() {
+		hideBenchmark();
+		showMainMenu();
+	}
+	
+	public function onBenchmarkComplete(r:Result) {
+		hideBenchmark();
+		showResultsScreen([r]);
+	}
 
-    private function initElements() {
-        // Add background image.
+	public function onResultsClose(event:Event) {
+		hideResultsScreen();
+		showMainMenu();
+	}
 
-        //_background = new Bitmap(Assets.getBitmapData("assets/textures/1x/background.jpg"));
-        //_background.smoothing = true;
-        //addChild(_background);
+	private function showMainMenu() {
+		// now would be a good time for a clean-up
+		System.gc();
+		
+		if (_menuScreen == null)
+			_menuScreen = new MenuScreen(this);
+		
+		addChild(_menuScreen);
+	}
 
-    }
-    
-    
-    public function onButtonTriggered(event:Event) {
-        var button:Button = cast(event.target, Button);
-        
-        hideMainMenu();
+	private function hideMainMenu() {
+		removeChild(_menuScreen);
+		_menuScreen = null;
+	}
 
-        showBenchmark();
-        _benchmark.showScene(button.name);
-    }
+	private function showBenchmark() {
+		_benchmark = new Benchmark(this);
+		addChild(_benchmark);
+	}
 
-    public function onBenchmarkStop() {
-        hideBenchmark();
-        showMainMenu();
-    }
-    
-    public function onBenchmarkComplete(r:Result) {
-        hideBenchmark();
-        showResultsScreen([r]);
-    }
+	private function hideBenchmark() {
+		removeChild(_benchmark);
+		_benchmark = null;
+	}
 
-    public function onResultsClose(event:Event) {
-        hideResultsScreen();
-        showMainMenu();
-    }
+	private function showResultsScreen(r:Array<Result>) {
+		_resultsScreen = new ResultsScreen(this, r);
+		addChild(_resultsScreen);
+	}
 
-    private function showMainMenu() {
-        // now would be a good time for a clean-up
-        System.gc();
-        
-        if (_menuScreen == null)
-            _menuScreen = new MenuScreen(this);
-        
-        addChild(_menuScreen);
-    }
-
-    private function hideMainMenu() {
-        removeChild(_menuScreen);
-        _menuScreen = null;
-    }
-
-    private function showBenchmark() {
-        addChild(_benchmark);
-    }
-
-    private function hideBenchmark() {
-        removeChild(_benchmark);
-        //_benchmark = null;
-    }
-
-    private function showResultsScreen(r:Array<Result>) {
-        _resultsScreen = new ResultsScreen(this, r);
-        addChild(_resultsScreen);
-    }
-
-    private function hideResultsScreen() {
-        removeChild(_resultsScreen);
-        _resultsScreen = null;
-    }
+	private function hideResultsScreen() {
+		removeChild(_resultsScreen);
+		_resultsScreen = null;
+	}
 }
