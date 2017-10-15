@@ -2,7 +2,7 @@ package;
 
 import scenes.BunnyScene;
 import scenes.StarlingImagesScene;
-
+import scenes.DisplayListUIScene;
 
 import openfl.display.Sprite;
 
@@ -28,6 +28,7 @@ class MenuScreen extends Sprite {
 		
 		var scenesToCreate:Array<Array<Dynamic>> = [
 			["Bunny", BunnyScene],
+			["DisplayList UI", DisplayListUIScene],
 			["Starling Images", StarlingImagesScene],
 		];
 
@@ -38,14 +39,13 @@ class MenuScreen extends Sprite {
 			var sceneClass:Class<Dynamic>  = sceneToCreate[1];
 			
 			var button:Button = new Button(150, 22, sceneTitle);
-			button.x = count % 2 == 0 ? 30 : 190;
-			button.y = 155 + Std.int(count / 2) * 46;
+/*			button.x = count % 2 == 0 ? 30 : 190;
+			button.y = 155 + Std.int(count / 2) * 46;*/
+			button.x = 30;
+			button.y = 155 + count * 30;
 			button.name = Type.getClassName(sceneClass);
 			button.addEventListener(MouseEvent.CLICK, main.onButtonTriggered);
 			addChild(button);
-			
-			if (scenesToCreate.length % 2 != 0 && count % 2 == 1)
-				button.y += 24;
 			
 			count++;
 		}
