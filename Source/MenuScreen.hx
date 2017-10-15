@@ -23,7 +23,7 @@ class MenuScreen extends Sprite {
 		["DisplayList UI", DisplayListUIScene],
 		["Starling Images", StarlingImagesScene],
 	];
-	private var _scenesClassNames = ["BunnyScene", "DisplayListUIScene", "StarlingImagesScene"];
+	private var _scenesClassNames = ["scenes.BunnyScene", "scenes.DisplayListUIScene", "scenes.StarlingImagesScene"];
 
 	public function new(main:Main) {
 		super();
@@ -70,12 +70,13 @@ class MenuScreen extends Sprite {
 		addChild(button);
 
 		
-		// show information about rendering method (hardware/software)
+		// show information about rendering method (hardware/software) 
+		// fails on some openfl versions
 
 		//main.stage.stage3Ds[0].addEventListener( Event.CONTEXT3D_CREATE, onInitStage3D );
 		//main.stage.stage3Ds[0].requestContext3D();	
 		
-		var driverInfo:String = "Driver: ";//Starling.current.context.driverInfo;
+		/*var driverInfo:String = "Driver: ";//Starling.current.context.driverInfo;
 		var infoText:TextField = new Text(600, 64, driverInfo);
 		infoText.x = 5;
 		infoText.y = 475;
@@ -84,14 +85,14 @@ class MenuScreen extends Sprite {
 		var copyright = new Text(400, 20, "Copyright 2017, InnoGames GmbH");
 		copyright.x = 5;
 		copyright.y = 500;
-		addChild(copyright);
+		addChild(copyright);*/
 	}
 
 	private function onButtonTriggered(event: Event) {
 		var button:Button = cast(event.target, Button);
 		var runList:Array<String>;
 		if(button.name == "all") {
-			runList = ["scenes.BunnyScene", "scenes.DisplayListUIScene"];
+			runList = _scenesClassNames;
 		}
 		else {
 			runList = [button.name];
@@ -100,7 +101,7 @@ class MenuScreen extends Sprite {
 		_main.onMenuButton(runList);
 	}
 
-	private function onInitStage3D(e: Event) {
+	/*private function onInitStage3D(e: Event) {
 		trace(stage.stage3Ds[0].context3D.driverInfo);
-	}
+	}*/
 }
