@@ -112,7 +112,7 @@ class Benchmark extends Sprite {
 	private function onTimer() {
 		var stateTime = Timer.stamp()-_stateStart;
 		if (_state == Tuning) {
-			if (stateTime >= 2) {
+			if (stateTime >= 3) {
 				onTuningComplete();
 				_state == Benchmarking;
 				_stateStart = Timer.stamp();
