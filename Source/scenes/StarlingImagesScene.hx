@@ -34,9 +34,6 @@ import starling.textures.Texture;
 
 	public function new(stage: Stage) {
 		super();
-	}
-
-	public function start() {
 
 		// the container will hold all test objects
 		_container = new Sprite();
@@ -46,16 +43,16 @@ import starling.textures.Texture;
 									  // thus, it is more efficient to disable them.
 		addChildAt(_container, 0);
 
-		var assets = loadAssets();
-
 		_frameTimes = new Array<Float>();
 		_objectPool = [];
-		_objectTexture = assets.getTexture("benchmark_object");
 
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
-
-		//addEventListener(Event.TRIGGERED, onButtonTriggered);
         addEventListener(KeyboardEvent.KEY_DOWN, onKey);
+	}
+
+	public function start() {
+		var assets = loadAssets();
+		_objectTexture = assets.getTexture("benchmark_object");
 
 		onStartButtonTriggered();
 	}
