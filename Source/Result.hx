@@ -13,6 +13,6 @@ class Result {
 	}
 
 	public function calcScore():Int {
-		return cast(objectCount * fps / 1000, Int);
+		return Math.round(objectCount * fps / 1000);
 	}
 }
