@@ -17,6 +17,14 @@ import openfl.events.Event;
 	The Menu screen displays the main menu.
 **/
 class MenuScreen extends Sprite {
+	private var _main:Main;
+	private var _scenesToCreate:Array<Array<Dynamic>> = [
+		["Bunny", BunnyScene],
+		["DisplayList UI", DisplayListUIScene],
+		["Starling Images", StarlingImagesScene],
+	];
+	private var _scenesClassNames = ["BunnyScene", "DisplayListUIScene", "StarlingImagesScene"];
+
 	public function new(main:Main) {
 		super();
 		init(main);
@@ -25,16 +33,13 @@ class MenuScreen extends Sprite {
 	private function init(main:Main) {
 		//var logo:Image = new Image(Game.assets.getTexture("logo"));
 		//addChild(logo);
+		_main = main;
 		
-		var scenesToCreate:Array<Array<Dynamic>> = [
-			["Bunny", BunnyScene],
-			["DisplayList UI", DisplayListUIScene],
-			["Starling Images", StarlingImagesScene],
-		];
+
 
 		var count:Int = 0;
 		
-		for (sceneToCreate in scenesToCreate) {
+		for (sceneToCreate in _scenesToCreate) {
 			var sceneTitle:String = sceneToCreate[0];
 			var sceneClass:Class<Dynamic>  = sceneToCreate[1];
 			
@@ -44,12 +49,25 @@ class MenuScreen extends Sprite {
 			button.x = 30;
 			button.y = 155 + count * 30;
 			button.name = Type.getClassName(sceneClass);
-			button.addEventListener(MouseEvent.CLICK, main.onButtonTriggered);
+			button.addEventListener(MouseEvent.CLICK, onButtonTriggered);
 			addChild(button);
 			
 			count++;
 		}
 
+		var button:Button = new Button(150, 22, "Run all");
+		button.x = 30;
+		button.y = 400;
+		button.name = "all";
+		button.addEventListener(MouseEvent.CLICK, onButtonTriggered);
+		addChild(button);
+
+		var button:Button = new Button(150, 22, "Run all");
+		button.x = 30;
+		button.y = 400;
+		button.name = "all";
+		button.addEventListener(MouseEvent.CLICK, onButtonTriggered);
+		addChild(button);
 
 		
 		// show information about rendering method (hardware/software)
@@ -67,6 +85,19 @@ class MenuScreen extends Sprite {
 		copyright.x = 5;
 		copyright.y = 500;
 		addChild(copyright);
+	}
+
+	private function onButtonTriggered(event: Event) {
+		var button:Button = cast(event.target, Button);
+		var runList:Array<String>;
+		if(button.name == "all") {
+			runList = ["scenes.BunnyScene", "scenes.DisplayListUIScene"];
+		}
+		else {
+			runList = [button.name];
+		}
+
+		_main.onMenuButton(runList);
 	}
 
 	private function onInitStage3D(e: Event) {

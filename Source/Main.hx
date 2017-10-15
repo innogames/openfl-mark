@@ -17,6 +17,9 @@ class Main extends Sprite {
 	private var _background:Bitmap;
 	private var _resultsScreen:ResultsScreen;
 
+	private var _runList:Array<String>;
+	private var _results:Array<Result>;
+
 	public function new() {
 		super();
 		if (stage != null) start();
@@ -36,13 +39,17 @@ class Main extends Sprite {
 		showMainMenu();
 	}
 
-	public function onButtonTriggered(event:Event) {
-		var button:Button = cast(event.target, Button);
-		
+	public function onMenuButton(runList:Array<String>) {
 		hideMainMenu();
 
-		showBenchmark();
-		_benchmark.showScene(button.name);
+		_runList = runList;
+		_results = [];
+		var name = _runList.shift();
+		showBenchmark(name);
+	}
+
+	public function onAll() {
+		hideMainMenu();
 	}
 
 	public function onBenchmarkStop() {
@@ -52,7 +59,16 @@ class Main extends Sprite {
 	
 	public function onBenchmarkComplete(r:Result) {
 		hideBenchmark();
-		showResultsScreen([r]);
+
+		_results.push(r);
+
+		if(_runList.length > 0) {
+			// Take next benchmark
+			var name = _runList.shift();
+			showBenchmark(name);
+		} else {
+			showResultsScreen(_results);
+		}
 	}
 
 	public function onResultsClose(event:Event) {
@@ -75,9 +91,10 @@ class Main extends Sprite {
 		_menuScreen = null;
 	}
 
-	private function showBenchmark() {
+	private function showBenchmark(name:String) {
 		_benchmark = new Benchmark(this);
 		addChild(_benchmark);
+		_benchmark.showScene(name);
 	}
 
 	private function hideBenchmark() {
