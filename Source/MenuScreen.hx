@@ -11,7 +11,7 @@ import openfl.text.TextField;
 import utils.Button;
 import utils.Text;
 import openfl.events.MouseEvent;
-
+import openfl.events.Event;
 
 /**
 	The Menu screen displays the main menu.
@@ -49,8 +49,13 @@ class MenuScreen extends Sprite {
 			
 			count++;
 		}
+
+
 		
 		// show information about rendering method (hardware/software)
+
+		//main.stage.stage3Ds[0].addEventListener( Event.CONTEXT3D_CREATE, onInitStage3D );
+		//main.stage.stage3Ds[0].requestContext3D();	
 		
 		var driverInfo:String = "Driver: ";//Starling.current.context.driverInfo;
 		var infoText:TextField = new Text(600, 64, driverInfo);
@@ -62,5 +67,9 @@ class MenuScreen extends Sprite {
 		copyright.x = 5;
 		copyright.y = 500;
 		addChild(copyright);
+	}
+
+	private function onInitStage3D(e: Event) {
+		trace(stage.stage3Ds[0].context3D.driverInfo);
 	}
 }
