@@ -67,7 +67,7 @@ class Main extends Sprite {
     
     public function onBenchmarkComplete(r:Result) {
         hideBenchmark();
-        showResultsScreen(r);
+        showResultsScreen([r]);
     }
 
     public function onResultsClose(event:Event) {
@@ -99,7 +99,7 @@ class Main extends Sprite {
         //_benchmark = null;
     }
 
-    private function showResultsScreen(r:Result) {
+    private function showResultsScreen(r:Array<Result>) {
         _resultsScreen = new ResultsScreen(this, r);
         addChild(_resultsScreen);
     }

@@ -8,33 +8,34 @@ import openfl.events.MouseEvent;
 
 
 class ResultsScreen extends Sprite {
-	public function new(main:Main, result:Result) {
+	public function new(main:Main, results:Array<Result>) {
 		super();
 
-		var closeButton = new Button(100, 22, "Close");
-		closeButton.x = 50;
-		closeButton.y = 300;
-		closeButton.addEventListener(MouseEvent.CLICK, main.onResultsClose);
-		addChild(closeButton);
+		var titleResults = new Text(100, 20, "Results");
+		titleResults.x = 50;
+		titleResults.y = 15;
+		addChild(titleResults);
 
 		var headerFPS = new Text(100, 20, "FPS");
 		headerFPS.x = 250;
-		headerFPS.y = 20;
+		headerFPS.y = 40;
 		addChild(headerFPS);
 
 		var headerObjectCount = new Text(100, 20, "Object count");
 		headerObjectCount.x = 350;
-		headerObjectCount.y = 20;
+		headerObjectCount.y = 40;
 		addChild(headerObjectCount);
 
 		var headerScore = new Text(100, 20, "Score");
 		headerScore.x = 450;
-		headerScore.y = 20;
+		headerScore.y = 40;
 		addChild(headerScore);
 
-		for (i in 0...1) {
+		for (i in 0...results.length) {
+			var result = results[i];
+
 			var row = new Sprite();
-			row.y = 40+i*20;
+			row.y = 60+i*20;
 
 			var name = new Text(200, 20, Std.string(result.name));
 			name.x = 50;
@@ -56,18 +57,30 @@ class ResultsScreen extends Sprite {
 		}
 
 
-		
-		// show information about rendering method (hardware/software)
-		
-		/*var driverInfo:String = "TODO";//Starling.current.context.driverInfo;
-		var infoText:TextField = new Text(400, 64, driverInfo);
-		infoText.x = 5;
-		infoText.y = 475 - infoText.height;
-		//infoText.addEventListener(TouchEvent.TOUCH, onInfoTextTouched);
-		addChildAt(infoText, 0);*/
+		var copyButton = new Button(200, 22, "Copy to Clipboard");
+		copyButton.x = 50;
+		copyButton.y = 500;
+		copyButton.addEventListener(MouseEvent.CLICK, function(e) {
+			this.onCopy(results);
+		});
+		addChild(copyButton);
+
+		var closeButton = new Button(100, 22, "Close");
+		closeButton.x = 650;
+		closeButton.y = 500;
+		closeButton.addEventListener(MouseEvent.CLICK, main.onResultsClose);
+		addChild(closeButton);
 	}
 	
 	private function init(main:Main) {
 
+	}
+
+	private function onCopy(results:Array<Result>) {
+		var text = "";
+		for (result in results) {
+			text += '${result.name}\t${result.fps}\t${result.objectCount}\t${result.calcScore()}';
+		}
+		openfl.system.System.setClipboard(text);
 	}
 }
