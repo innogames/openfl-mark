@@ -5,7 +5,6 @@ import openfl.display.Sprite;
 import openfl.display.Shape;
 import openfl.text.TextField;
 
-import openfl.display.Tileset;
 import openfl.events.Event;
 import openfl.Assets;
 
@@ -25,6 +24,9 @@ class BigSprite extends Sprite {
 	}
 }
 
+/**
+	Display a scene consisting of different UI Elements where some of them are animated
+**/
 class DisplayListUIScene extends Sprite implements Benchmarkable {
 	
 	private var bigSprites:Array<Sprite>;
@@ -36,7 +38,7 @@ class DisplayListUIScene extends Sprite implements Benchmarkable {
 		super ();
 		
 		addTestObjects(1000);
-		
+
 	}
 
 	public function addTestObjects(count:Int) {
@@ -87,8 +89,5 @@ class DisplayListUIScene extends Sprite implements Benchmarkable {
 	}
 
 
-	private function onEnterFrame (event:Event) {
-		
-		
-	}
+
 }

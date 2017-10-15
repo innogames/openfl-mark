@@ -25,7 +25,9 @@ class Bunny extends Tile {
 	
 }
 
-
+/**
+	Whabbits rendered via Tilemap
+**/
 class BunnyScene extends Sprite implements Benchmarkable {
 	
 	
