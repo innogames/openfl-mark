@@ -82,6 +82,9 @@ class ResultsScreen extends Sprite {
 	private function onCopy(results:Array<Result>) {
 		var text = "";
 		for (result in results) {
+			if(text.length > 0) {
+				text += "\n";
+			}
 			text += '${result.name}\t${result.fps}\t${result.objectCount}\t${result.calcScore()}';
 		}
 		openfl.system.System.setClipboard(text);
