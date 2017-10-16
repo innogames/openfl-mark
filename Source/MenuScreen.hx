@@ -4,6 +4,7 @@ import scenes.BunnyScene;
 import scenes.StarlingImagesScene;
 import scenes.DisplayListUIScene;
 import scenes.StarlingUIScene;
+import scenes.FilterScene;
 import openfl.display.Sprite;
 
 import openfl.text.TextField;
@@ -20,11 +21,12 @@ class MenuScreen extends Sprite {
 	private var _main:Main;
 	private var _scenesToCreate:Array<Array<Dynamic>> = [
 		["Bunny", BunnyScene],
+		["Filter", FilterScene],
 		["DisplayList UI", DisplayListUIScene],
 		["Starling UI", StarlingUIScene],
 		["Starling Images", StarlingImagesScene],
 	];
-	private var _scenesClassNames = ["scenes.BunnyScene", "scenes.DisplayListUIScene", "scenes.StarlingUIScene", "scenes.StarlingImagesScene"];
+	private var _scenesClassNames = ["scenes.BunnyScene", "scenes.FilterScene", "scenes.DisplayListUIScene", "scenes.StarlingUIScene", "scenes.StarlingImagesScene"];
 
 	public function new(main:Main) {
 		super();
