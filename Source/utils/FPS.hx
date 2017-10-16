@@ -8,7 +8,7 @@ import openfl.events.Event;
 class FPS extends Text {
 	
 	
-	public var currentFPS (default, null):Int;
+	public var currentFPS (default, null):Float;
 	
 	private var cacheCount:Int;
 	private var times:Array <Float>;
@@ -39,14 +39,14 @@ class FPS extends Text {
 		var currentTime = Timer.stamp ();
 		times.push (currentTime);
 		
-		while (times[0] < currentTime - 1) {
+		while (times[0] < currentTime - 2) {
 			
 			times.shift ();
 			
 		}
 		
 		var currentCount = times.length;
-		currentFPS = Math.round ((currentCount + cacheCount) / 2);
+		currentFPS = Math.round(currentCount) / 2;
 		
 		if (currentCount != cacheCount /*&& visible*/) {
 			
