@@ -22,15 +22,10 @@ import starling.textures.Texture;
 @:keep class StarlingImagesScene extends Sprite implements BenchmarkableStarling {
 	private static inline var FRAME_TIME_WINDOW_SIZE:Int = 10;
 
-	private var _resultText:TextField;
-	private var _statusText:TextField;
 	private var _container:Sprite;
 	private var _objectPool:Array<DisplayObject>;
 	private var _objectTexture:Texture;
 
-	private var _frameCount:Int;
-	private var _frameTimes:Array<Float>;
-	private var _targetFps:Int;
 
 	public function new(stage: Stage) {
 		super();
@@ -43,7 +38,6 @@ import starling.textures.Texture;
 									  // thus, it is more efficient to disable them.
 		addChildAt(_container, 0);
 
-		_frameTimes = new Array<Float>();
 		_objectPool = [];
 
 		addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -54,13 +48,20 @@ import starling.textures.Texture;
 		var assets = loadAssets();
 		_objectTexture = assets.getTexture("benchmark_object");
 
-		onStartButtonTriggered();
+		addTestObjects(1000);
 	}
 
 	public function addTestObjects(count:Int) {
+		for(i in 0...Math.round(count/16)) {
+			add16TestObjects();
+			_container.scale *= 0.99;
+		}
+	}
+
+	public function add16TestObjects() {
 		var scale:Float = 1.0 / _container.scale;
 
-		for (i in 0...count) {
+		for (i in 0...16) {
 			var egg:DisplayObject = getObjectFromPool();
 			var distance:Float = (100 + Math.random() * 100) * scale;
 			var angle:Float = Math.random() * Math.PI * 2.0;
@@ -87,26 +88,8 @@ import starling.textures.Texture;
 		super.dispose();
 	}
 
-	private function onStartButtonTriggered() {
-		trace("Starting benchmark");
-
-		_targetFps = Std.int(Starling.current.nativeStage.frameRate);
-		_frameCount = 0;
-
-		addTestObjects(10000);
-
-
-		for (i in 0...FRAME_TIME_WINDOW_SIZE)
-			_frameTimes[i] = 1.0 / _targetFps;
-
-		if (_resultText != null) {
-			_resultText.removeFromParent(true);
-			_resultText = null;
-		}
-	}
 
 	private function onEnterFrame(event:EnterFrameEvent, passedTime:Float) {
-		_frameCount++;
 		_container.rotation += event.passedTime * 0.5;
 	}
 	
