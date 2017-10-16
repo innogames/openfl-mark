@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	
-	<meta title="OpenFLMark" package="com.innogames.openflmark" version="1.0.0" company="InnoGames" />
+	<meta title="OpenFLMark" package="com.innogames.openflmark" version="0.1.0" company="InnoGames" />
 	<app main="Main" path="Export" file="OpenFLMark" />
 	
 	<window width="800" height="600" orientation="portrait" background="0xDDDDDD" />
