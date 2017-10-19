@@ -32,15 +32,17 @@ class Benchmark extends Sprite {
 	private var _controller:Controller;
 	private var _starling:Starling;
 	private var _main:Main;
+	private var _scenes:Scenes;
 	private var _timer:Timer;
 	private var _state:BenchmarkState;
 	private var _stateStart:Float;
 
 	
-	public function new(main:Main) {
+	public function new(main:Main, scenes:Scenes) {
 		super();
 
 		this._main = main;
+		this._scenes = scenes;
 
 		_controller = new Controller(this);
 		addChild(_controller);
@@ -103,7 +105,7 @@ class Benchmark extends Sprite {
 
 		_controller.setTestObjectCount(_currentScene.getTestObjectCount());
 		_controller.setStatus("tuning object count");
-		_controller.setScene(Type.getClassName(Type.getClass(_currentScene)));
+		_controller.setScene(_scenes.getName(_currentScene));
 
 		_timer = new Timer(100);
 		_timer.run = function() { onTimer(); }
@@ -147,7 +149,7 @@ class Benchmark extends Sprite {
 
 
 	private function onBenchmarkComplete() {
-		var className = Type.getClassName(Type.getClass(_currentScene));
+		var className = _scenes.getName(_currentScene);
 		var r = new Result(className);
 		r.fps = _controller.getFPS();
 		r.objectCount = _currentScene.getTestObjectCount();

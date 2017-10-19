@@ -1,10 +1,6 @@
 package;
 
-import scenes.BunnyScene;
-import scenes.StarlingImagesScene;
-import scenes.DisplayListUIScene;
-import scenes.StarlingUIScene;
-import scenes.FilterScene;
+
 import openfl.display.Sprite;
 
 import openfl.text.TextField;
@@ -19,30 +15,25 @@ import openfl.events.Event;
 **/
 class MenuScreen extends Sprite {
 	private var _main:Main;
-	private var _scenesToCreate:Array<Array<Dynamic>> = [
-		["Bunny", BunnyScene],
-		["Filter", FilterScene],
-		["DisplayList UI", DisplayListUIScene],
-		["Starling UI", StarlingUIScene],
-		["Starling Images", StarlingImagesScene],
-	];
-	private var _scenesClassNames = ["scenes.BunnyScene", "scenes.FilterScene", "scenes.DisplayListUIScene", "scenes.StarlingUIScene", "scenes.StarlingImagesScene"];
+	private var _scenes:Scenes;
 
-	public function new(main:Main) {
+	public function new(main:Main, scenes:Scenes) {
 		super();
-		init(main);
+		_main = main;
+		_scenes = scenes;
+
+		init();
 	}
 	
-	private function init(main:Main) {
+	private function init() {
 		//var logo:Image = new Image(Game.assets.getTexture("logo"));
 		//addChild(logo);
-		_main = main;
 		
 
 
 		var count:Int = 0;
 		
-		for (sceneToCreate in _scenesToCreate) {
+		for (sceneToCreate in _scenes._scenesToCreate) {
 			var sceneTitle:String = sceneToCreate[0];
 			var sceneClass:Class<Dynamic>  = sceneToCreate[1];
 			
@@ -95,7 +86,7 @@ class MenuScreen extends Sprite {
 		var button:Button = cast(event.target, Button);
 		var runList:Array<String>;
 		if(button.name == "all") {
-			runList = _scenesClassNames;
+			runList = _scenes._scenesClassNames;
 		}
 		else {
 			runList = [button.name];

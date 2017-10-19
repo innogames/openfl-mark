@@ -12,6 +12,8 @@ import openfl.events.Event;
 
 
 class Main extends Sprite {
+	private var _scenes:Scenes = new Scenes();
+
 	private var _menuScreen:MenuScreen;
 	private var _benchmark:Benchmark;
 	private var _background:Bitmap;
@@ -81,7 +83,7 @@ class Main extends Sprite {
 		System.gc();
 		
 		if (_menuScreen == null)
-			_menuScreen = new MenuScreen(this);
+			_menuScreen = new MenuScreen(this, _scenes);
 		
 		addChild(_menuScreen);
 	}
@@ -92,7 +94,7 @@ class Main extends Sprite {
 	}
 
 	private function showBenchmark(name:String) {
-		_benchmark = new Benchmark(this);
+		_benchmark = new Benchmark(this, _scenes);
 		addChild(_benchmark);
 		_benchmark.showScene(name);
 	}
