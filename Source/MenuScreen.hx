@@ -33,7 +33,7 @@ class MenuScreen extends Sprite {
 
 		var count:Int = 0;
 		
-		for (sceneToCreate in _scenes._scenesToCreate) {
+		for (sceneToCreate in _scenes._scenes) {
 			var sceneTitle:String = sceneToCreate[0];
 			var sceneClass:Class<Dynamic>  = sceneToCreate[1];
 			
@@ -86,7 +86,7 @@ class MenuScreen extends Sprite {
 		var button:Button = cast(event.target, Button);
 		var runList:Array<String>;
 		if(button.name == "all") {
-			runList = _scenes._scenesClassNames;
+			runList = _scenes.getAllClassNames();
 		}
 		else {
 			runList = [button.name];
