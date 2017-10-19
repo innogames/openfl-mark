@@ -52,16 +52,9 @@ import starling.textures.Texture;
 	}
 
 	public function addTestObjects(count:Int) {
-		for(i in 0...Math.round(count/16)) {
-			add16TestObjects();
-			_container.scale *= 0.99;
-		}
-	}
+		for (i in 0...count) {
+			var scale:Float = Math.random();
 
-	public function add16TestObjects() {
-		var scale:Float = 1.0 / _container.scale;
-
-		for (i in 0...16) {
 			var egg:DisplayObject = getObjectFromPool();
 			var distance:Float = (100 + Math.random() * 100) * scale;
 			var angle:Float = Math.random() * Math.PI * 2.0;
