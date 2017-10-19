@@ -48,7 +48,7 @@ import starling.textures.Texture;
 		var assets = loadAssets();
 		_objectTexture = assets.getTexture("benchmark_object");
 
-		addTestObjects(1000);
+		addTestObjects(10000);
 	}
 
 	public function addTestObjects(count:Int) {
