@@ -103,6 +103,7 @@ class Benchmark extends Sprite {
 
 		_controller.setTestObjectCount(_currentScene.getTestObjectCount());
 		_controller.setStatus("tuning object count");
+		_controller.setScene(Type.getClassName(Type.getClass(_currentScene)));
 
 		_timer = new Timer(100);
 		_timer.run = function() { onTimer(); }

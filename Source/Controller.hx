@@ -15,6 +15,7 @@ class Controller extends Sprite {
 	private var _fps:FPS;
 	private var _testObjectCount:Text;
 	private var _status:Text;
+	private var _scene:Text;
 	
 	public function new(benchmark:Benchmark) {
 		super();
@@ -33,9 +34,14 @@ class Controller extends Sprite {
 		_status.x = 300;
 		_status.y = 4;
 		addChild(_status);
+
+		_scene = new Text(200, 20, "scene");
+		_scene.x = 500;
+		_scene.y = 4;
+		addChild(_scene);
 		
 		_backButton = new Button(100, 22, "Stop");
-		_backButton.x = 500;
+		_backButton.x = 680;
 		_backButton.y = 4;
 		_backButton.name = "backButton";
 		_backButton.addEventListener(MouseEvent.CLICK, benchmark.onStop);
@@ -52,5 +58,9 @@ class Controller extends Sprite {
 
 	public function setStatus(status:String) {
 		_status.text = status;
+	}
+
+	public function setScene(scene:String) {
+		_scene.text = scene;
 	}
 }
