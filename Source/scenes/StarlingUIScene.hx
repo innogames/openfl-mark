@@ -9,7 +9,7 @@ import starling.textures.Texture;
 import starling.text.TextField;
 
 
-import openfl.events.Event;
+import starling.events.Event;
 import openfl.Assets;
 
 
