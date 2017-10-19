@@ -56,6 +56,8 @@ class Benchmark extends Sprite {
 		if (Std.is(_currentScene, StarlingSprite)) {
 			var scene = cast(_currentScene, StarlingSprite);
 			scene.removeFromParent(true);
+
+			_starling.dispose();
 		}
 		else if (Std.is(_currentScene, OpenFLSprite)) {
 			var scene = cast(_currentScene, OpenFLSprite);
