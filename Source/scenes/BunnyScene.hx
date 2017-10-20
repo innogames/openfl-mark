@@ -48,9 +48,9 @@ class BunnyScene extends Sprite implements Benchmarkable {
 		bunnies = new Array ();
 		
 		minX = 0;
-		maxX = stage.stageWidth;
+		maxX = Constants.BenchmarkWidth;
 		minY = 0;
-		maxY = stage.stageHeight;
+		maxY = Constants.SceneHeight;
 		gravity = 0.5;
 		
 		var bitmapData = Assets.getBitmapData ("assets/wabbit_alpha.png");

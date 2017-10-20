@@ -77,8 +77,8 @@ class Benchmark extends Sprite {
 
 
 			_starling = new Starling(sceneClass, _main.stage, null, null, Context3DRenderMode.AUTO, "auto");
-			_starling.stage.stageWidth = Constants.GameWidth;
-			_starling.stage.stageHeight = Constants.GameHeight;
+			_starling.stage.stageWidth = Constants.BenchmarkWidth;
+			_starling.stage.stageHeight = Constants.SceneHeight;
 			_starling.enableErrorChecking = Capabilities.isDebugger;
 			//_starling.skipUnchangedFrames = true;
 			//_starling.simulateMultitouch = true;
@@ -160,7 +160,7 @@ class Benchmark extends Sprite {
 	}
 
 	private function onResize(e:openfl.events.Event) {
-		var viewPort:Rectangle = RectangleUtil.fit(new Rectangle(0, 0, Constants.GameWidth, Constants.GameHeight), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight));
+		var viewPort:Rectangle = RectangleUtil.fit(new Rectangle(0, 0, Constants.BenchmarkWidth, Constants.SceneHeight), new Rectangle(0, 0, stage.stageWidth, stage.stageHeight));
 		try {
 			this._starling.viewPort = viewPort;
 		}
