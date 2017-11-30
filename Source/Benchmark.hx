@@ -66,6 +66,7 @@ class Benchmark extends Sprite {
 			removeChild(scene);
 		}
 
+		_currentScene.disposeScene(stage);
 		_currentScene = null;
 		_timer.stop();
 	}

@@ -46,6 +46,9 @@ class StarlingUIScene extends Sprite implements BenchmarkableStarling {
 		
 	}
 
+	public function disposeScene(stage:Stage):Void {
+	}
+
 	public function start() {
 		_wabbitData = Texture.fromBitmapData(Assets.getBitmapData ("assets/wabbit_alpha.png"));
 

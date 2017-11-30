@@ -44,6 +44,9 @@ import starling.textures.Texture;
         addEventListener(KeyboardEvent.KEY_DOWN, onKey);
 	}
 
+	public function disposeScene(stage:Stage):Void {
+	}
+
 	public function start() {
 		var assets = loadAssets();
 		_objectTexture = assets.getTexture("benchmark_object");

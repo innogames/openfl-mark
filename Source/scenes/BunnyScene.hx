@@ -66,6 +66,10 @@ class BunnyScene extends Sprite implements Benchmarkable {
 		
 	}
 
+	public function disposeScene(stage:Stage):Void {
+		stage.removeEventListener (Event.ENTER_FRAME, onEnterFrame);
+	}
+
 	public function addTestObjects(count:Int) {
 		for (i in 0...count) {
 			

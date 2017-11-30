@@ -29,6 +29,9 @@ class FilterScene extends Sprite implements Benchmarkable {
 
 	}
 
+	public function disposeScene(stage:Stage):Void {
+	}
+
 	public function addTestObjects(count:Int) {
 		count = Math.round(count / OBJECTS_PER_BIG_SPRITE);
 
