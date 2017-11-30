@@ -3,6 +3,7 @@ import scenes.Benchmarkable;
 import scenes.BunnyScene;
 import scenes.StarlingImagesScene;
 import scenes.DisplayListUIScene;
+import scenes.BitmapDataScene;
 import scenes.StarlingUIScene;
 import scenes.FilterScene;
 
@@ -11,6 +12,7 @@ class Scenes {
 		["Bunny", BunnyScene],
 		["Filter", FilterScene],
 		["DisplayList UI", DisplayListUIScene],
+		["BitmapData Scene", BitmapDataScene],
 		["Starling UI", StarlingUIScene],
 		["Starling Images", StarlingImagesScene]
 	];
