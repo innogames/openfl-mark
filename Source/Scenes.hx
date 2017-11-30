@@ -2,8 +2,8 @@ import scenes.Benchmarkable;
 
 import scenes.BunnyScene;
 import scenes.StarlingImagesScene;
-import scenes.DisplayListUIScene;
 import scenes.BitmapDataScene;
+import scenes.DisplayListUIScene;
 import scenes.StarlingUIScene;
 import scenes.FilterScene;
 
@@ -11,8 +11,8 @@ class Scenes {
 	public var _scenes:Array<Array<Dynamic>> = [
 		["Bunny", BunnyScene],
 		["Filter", FilterScene],
-		["DisplayList UI", DisplayListUIScene],
 		["BitmapData Scene", BitmapDataScene],
+		["DisplayList UI", DisplayListUIScene],
 		["Starling UI", StarlingUIScene],
 		["Starling Images", StarlingImagesScene]
 	];

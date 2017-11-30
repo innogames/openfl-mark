@@ -71,7 +71,9 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 			
 			bitmap.bitmapData.fillRect(new Rectangle(4, 4, 52, 52), 0x80FF0080);
 
-			bitmap.bitmapData.copyPixels(openflData, openflData.rect, new openfl.geom.Point(10, 10), null, null, true);
+			for (i in 0...10) {
+				bitmap.bitmapData.copyPixels(openflData, openflData.rect, new openfl.geom.Point(10, 10), null, null, true);
+			}
 		}
 		
 	}
