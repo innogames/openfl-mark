@@ -27,7 +27,7 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 		
 		bitmaps = new Array ();
 		
-		openflData = Assets.getBitmapData ("assets/openfl.png");
+		openflData = Assets.getBitmapData ("assets/wabbit_alpha.png");
 
 		stage.addEventListener (Event.ENTER_FRAME, onEnterFrame);
 		
@@ -58,6 +58,8 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 		var bitmap = new Bitmap (bitmapData);
 		bitmap.x = Math.random() * Constants.BenchmarkWidth;
 		bitmap.y = Math.random() * Constants.SceneHeight;
+
+		bitmap.visible = (bitmaps.length % 10 == 0);
 
 		bitmaps.push(bitmap);
 		addChild(bitmap);
