@@ -27,11 +27,11 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 		
 		bitmaps = new Array ();
 		
-		openflData = Assets.getBitmapData ("assets/wabbit_alpha.png");
+		openflData = Assets.getBitmapData ("assets/openfl.png");
 
 		stage.addEventListener (Event.ENTER_FRAME, onEnterFrame);
 		
-		addTestObjects(1000);
+		addTestObjects(100);
 		
 	}
 
@@ -53,13 +53,12 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 	
 	
 	private function addBitmap () {
-		var bitmapData = new BitmapData(40, 40, true, 0xFF0000FF);
+		var bitmapData = new BitmapData(120, 120, true, 0xFF0000FF);
 		
 		var bitmap = new Bitmap (bitmapData);
-		var perRow = 40;
 		bitmap.x = Math.random() * Constants.BenchmarkWidth;
 		bitmap.y = Math.random() * Constants.SceneHeight;
-		
+
 		bitmaps.push(bitmap);
 		addChild(bitmap);
 	}
@@ -71,9 +70,8 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 			
 			bitmap.bitmapData.fillRect(new Rectangle(4, 4, 52, 52), 0x80FF0080);
 
-			for (i in 0...10) {
-				bitmap.bitmapData.copyPixels(openflData, openflData.rect, new openfl.geom.Point(10, 10), null, null, true);
-			}
+			bitmap.bitmapData.copyPixels(openflData, openflData.rect, new openfl.geom.Point(10, 10), null, null, true);
+
 		}
 		
 	}
