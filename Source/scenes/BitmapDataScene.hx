@@ -27,7 +27,7 @@ class BitmapDataScene extends Sprite implements Benchmarkable {
 		
 		bitmaps = new Array ();
 		
-		openflData = Assets.getBitmapData ("assets/wabbit_alpha.png");
+		openflData = Assets.getBitmapData ("assets/openfl.png");
 
 		stage.addEventListener (Event.ENTER_FRAME, onEnterFrame);
 		
