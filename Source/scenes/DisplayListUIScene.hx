@@ -98,6 +98,8 @@ class DisplayListUIScene extends Sprite implements Benchmarkable {
 		smallSprite.y = 20;
 		mediumSprite.addChild(smallSprite);
 
+		mediumSprite.cacheAsBitmap = true;
+
 		return mediumSprite;
 	}
 
